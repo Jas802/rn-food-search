@@ -8,6 +8,13 @@ const SearchScreen = () => {
   const [term, setTerm] = useState('');
   const [searchYelp, results, errorMessage] = useResults();
 
+  const filterResultsByPrice = (price) => {
+    //price === '$' || "$$" || '$$$'
+    return results.filter((result) => {
+      return result.price === price;
+    });
+  };
+
   return (
     <View>
       <SearchBar
@@ -17,9 +24,12 @@ const SearchScreen = () => {
       />
       {errorMessage ? <Text>{errorMessage}</Text> : null}
       <Text>We have found {results.length} results</Text>
-      <ResultsList title='Cost Effective' />
-      <ResultsList title='A Little Pricier' />
-      <ResultsList title='Big Spender' />
+      <ResultsList results={filterResultsByPrice('$')} title='Cost Effective' />
+      <ResultsList
+        results={filterResultsByPrice('$$')}
+        title='Little Pricier'
+      />
+      <ResultsList results={filterResultsByPrice('$$$')} title='Big Spender' />
     </View>
   );
 };
