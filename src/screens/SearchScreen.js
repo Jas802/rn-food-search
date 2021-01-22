@@ -30,6 +30,7 @@ const SearchScreen = () => {
         title='Little Pricier'
       />
       <ResultsList results={filterResultsByPrice('$$$')} title='Big Spender' />
+      <ResultsList results={filterResultsByPrice('$$$$')} title='High Roller' />
     </View>
   );
 };
