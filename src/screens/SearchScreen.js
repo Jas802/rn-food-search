@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import SearchBar from '../components/SearchBar';
 import useResults from '../hooks/useResults';
 import ResultsList from '../components/ResultsList';
@@ -9,7 +9,7 @@ const SearchScreen = () => {
   const [searchYelp, results, errorMessage] = useResults();
 
   const filterResultsByPrice = (price) => {
-    //price === '$' || "$$" || '$$$'
+    //price === '$' || "$$" || '$$$' || '$$$$'
     return results.filter((result) => {
       return result.price === price;
     });
@@ -24,13 +24,24 @@ const SearchScreen = () => {
       />
       {errorMessage ? <Text>{errorMessage}</Text> : null}
       <Text>We have found {results.length} results</Text>
-      <ResultsList results={filterResultsByPrice('$')} title='Cost Effective' />
-      <ResultsList
-        results={filterResultsByPrice('$$')}
-        title='Little Pricier'
-      />
-      <ResultsList results={filterResultsByPrice('$$$')} title='Big Spender' />
-      <ResultsList results={filterResultsByPrice('$$$$')} title='High Roller' />
+      <ScrollView>
+        <ResultsList
+          results={filterResultsByPrice('$')}
+          title='Cost Effective'
+        />
+        <ResultsList
+          results={filterResultsByPrice('$$')}
+          title='Little Pricier'
+        />
+        <ResultsList
+          results={filterResultsByPrice('$$$')}
+          title='Big Spender'
+        />
+        <ResultsList
+          results={filterResultsByPrice('$$$$')}
+          title='High Roller'
+        />
+      </ScrollView>
     </View>
   );
 };
