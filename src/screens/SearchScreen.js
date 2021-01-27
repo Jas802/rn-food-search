@@ -16,14 +16,13 @@ const SearchScreen = () => {
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <>
       <SearchBar
         term={term}
         onTermChange={setTerm}
         onTermSubmit={() => searchYelp(term)}
       />
       {errorMessage ? <Text>{errorMessage}</Text> : null}
-      <Text>We have found {results.length} results</Text>
       <ScrollView>
         <ResultsList
           results={filterResultsByPrice('$')}
@@ -42,7 +41,7 @@ const SearchScreen = () => {
           title='High Roller'
         />
       </ScrollView>
-    </View>
+    </>
   );
 };
 
